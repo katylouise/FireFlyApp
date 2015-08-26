@@ -5,7 +5,8 @@
 //  Created by Rebecca Appleyard on 26/08/2015.
 //  Copyright (c) 2015 Firefly. All rights reserved.
 //
-
+import Parse
+import Bolts
 import UIKit
 
 @UIApplicationMain
@@ -15,7 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        Parse.enableLocalDatastore()
+        Parse.setApplicationId("yQ9ARKDFZjy9S3Qz3Va9uT76AbQm7rok6tL8YcwJ", clientKey: "8VmUpqJfqdXlxRBRPD5DDBcGLuXQsazysWEx9kEw")
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
+        let testObject = PFObject(className: "TestObject")
+        testObject["foo"] = "bar"
+        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            println("Object has been saved.")
+        }
         return true
     }
 
