@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Timeline Table View Controller-->
         <scene sceneID="9yl-xg-Atm">
             <objects>
-                <tableViewController id="OdO-0g-f0P" sceneMemberID="viewController">
+                <tableViewController id="OdO-0g-f0P" customClass="TimelineTableViewController" customModule="FireFly" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="227" sectionHeaderHeight="22" sectionFooterHeight="22" id="Rqe-3W-mha">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -36,6 +36,8 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="imageView" destination="Ibk-DZ-Vje" id="PvN-G3-nAO"/>
+                                    <outlet property="pictureView" destination="Ibk-DZ-Vje" id="VHT-nc-Zq9"/>
                                     <outlet property="timestampLabel" destination="yqe-8c-NeY" id="zx7-B1-3vd"/>
                                     <outlet property="usernameLabel" destination="K0h-il-iAR" id="WH8-Kk-GgT"/>
                                 </connections>
@@ -47,7 +49,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="ovj-I2-9TK">
-                        <barButtonItem key="leftBarButtonItem" title="Log out" id="aXL-Rm-jtX"/>
+                        <barButtonItem key="leftBarButtonItem" title="Log out" id="aXL-Rm-jtX">
+                            <connections>
+                                <action selector="logout:" destination="OdO-0g-f0P" id="6iu-UQ-ur6"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Wqs-di-Zc2">
                             <connections>
                                 <segue destination="3rd-fa-tqN" kind="push" id="TFB-G4-YRU"/>
@@ -88,7 +94,9 @@
                             <outlet property="delegate" destination="3rd-fa-tqN" id="zB6-tk-m0V"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="uIt-z2-waN"/>
+                    <navigationItem key="navigationItem" id="uIt-z2-waN">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="IDz-kZ-Wq6"/>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vnW-So-Nj8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

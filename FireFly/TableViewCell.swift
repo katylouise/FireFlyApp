@@ -11,8 +11,12 @@ import UIKit
 class TableViewCell: UITableViewCell {
 
     @IBOutlet weak var usernameLabel: UILabel!
+  
     @IBOutlet weak var timestampLabel: UILabel!
     
+    @IBOutlet weak var pictureView: UIImageView!
+
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B3048B9C-D263-4B9F-9756-42CEB0C26B06</string>
+	<key>IDESourceControlProjectName</key>
+	<string>FireFly</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>62DC63C93A5A06C0EF7F5FA80EB2CA4BB759480E</key>
+		<string>https://github.com/sivanpatel/FireFlyApp.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>FireFly.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>62DC63C93A5A06C0EF7F5FA80EB2CA4BB759480E</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/sivanpatel/FireFlyApp.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>62DC63C93A5A06C0EF7F5FA80EB2CA4BB759480E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>62DC63C93A5A06C0EF7F5FA80EB2CA4BB759480E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>FireFlyApp</string>
+		</dict>
+	</array>
+</dict>
+</plist>

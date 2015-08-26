@@ -7,9 +7,74 @@
 //
 
 import UIKit
+import Parse
+import Bolts
 
 class TimelineTableViewController: UITableViewController {
-
+  
+  
+  override func viewDidAppear(animated: Bool) {
+    if (PFUser.currentUser() == nil) {
+      var loginAlert:UIAlertController = UIAlertController(title: "Sign Up/Login", message: "Log in", preferredStyle: UIAlertControllerStyle.Alert)
+      loginAlert.addTextFieldWithConfigurationHandler({
+        textfield in
+          textfield.placeholder = "User Name"
+      })
+      loginAlert.addTextFieldWithConfigurationHandler({
+      textfield in
+        textfield.placeholder = "Password"
+        textfield.secureTextEntry = true
+      })
+      loginAlert.addAction(UIAlertAction(title: "Log in", style: UIAlertActionStyle.Default, handler: {
+            alertAction in
+        let textFields:NSArray = loginAlert.textFields! as NSArray
+        let usernameTextField:UITextField = textFields.objectAtIndex(0) as! UITextField
+        let passwordTextField:UITextField = textFields.objectAtIndex(1) as! UITextField
+        
+        PFUser.logInWithUsernameInBackground(usernameTextField.text, password: passwordTextField.text){
+          (user:PFUser?, error:NSError?)-> Void in
+          if user != nil {
+            println("Login successful")
+          } else {
+            println("Login failed")
+          }
+        }
+      }))
+      loginAlert.addAction(UIAlertAction(title: "Sign Up", style: UIAlertActionStyle.Default, handler: {
+        alertAction in
+        let textFields:NSArray = loginAlert.textFields! as NSArray
+        let usernameTextField:UITextField = textFields.objectAtIndex(0) as! UITextField
+        let passwordTextField:UITextField = textFields.objectAtIndex(1) as! UITextField
+        
+        var owner:PFUser = PFUser()
+        owner.username = usernameTextField.text
+        owner.password = passwordTextField.text
+        
+        owner.signUpInBackgroundWithBlock{
+         (succeeded, error)-> Void in
+          if error == nil {
+            println("Sign up successful")
+          } else {
+            println("\(error)")
+          }
+        }
+        
+        PFUser.logInWithUsernameInBackground(usernameTextField.text, password: passwordTextField.text){
+          (user:PFUser?, error:NSError?)-> Void in
+          if user != nil {
+            println("Login successful")
+          } else {
+            println("Login failed")
+          }
+        }
+      }))
+      
+      self.presentViewController(loginAlert, animated: true, completion: nil)
+    }
+  }
+  
+  
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,6 +104,10 @@ class TimelineTableViewController: UITableViewController {
         return 0
     }
 
+    @IBAction func logout(sender: AnyObject) {
+    }
+  
+  
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
