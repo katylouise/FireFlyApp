@@ -9,10 +9,22 @@
 import UIKit
 import Parse
 import Bolts
+import MobileCoreServices
 
-class TimelineTableViewController: UITableViewController {
+class TimelineTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  var img = UIImagePickerController()
   
   
+  @IBAction func addPicture(sender: AnyObject) {
+    
+    img.sourceType = .PhotoLibrary;
+    img.mediaTypes = [kUTTypeImage as String]
+    img.allowsEditing = false
+    img.modalPresentationStyle = .Popover
+    self.presentViewController(img, animated: true, completion: nil)
+
+}
+
   override func viewDidAppear(animated: Bool) {
     if (PFUser.currentUser() == nil) {
       var loginAlert:UIAlertController = UIAlertController(title: "Sign Up/Login", message: "Log in", preferredStyle: UIAlertControllerStyle.Alert)
@@ -74,10 +86,10 @@ class TimelineTableViewController: UITableViewController {
   }
   
   
-  
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      
+        img.delegate = self
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -85,6 +97,7 @@ class TimelineTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+  
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -105,18 +118,33 @@ class TimelineTableViewController: UITableViewController {
     }
 
     @IBAction func logout(sender: AnyObject) {
+      PFUser.logOut()
+      var currentUser = PFUser.currentUser()
+      self.viewDidAppear(true)
     }
   
+
   
-    /*
+  
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-
-        // Configure the cell...
-
+      var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
+          println("Anything")
+      func imagePickerController(picker: UIImagePickerController, didFinishPickingImageMediaWithInfo info: [NSObject: AnyObject]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
+          println("Image picked!")
+          cell.contentMode = .ScaleAspectFit
+          cell.imageView!.image = pickedImage
+        }
+        dismissViewControllerAnimated(true, completion: nil)
+      }
+      
+      func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
+      }
+      
         return cell
     }
-    */
+
 
     /*
     // Override to support conditional editing of the table view.

@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import Parse
+import Bolts
 
-class AddPictureViewController: UIViewController {
+
+class AddPictureViewController: UITableViewController {
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +24,8 @@ class AddPictureViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+  
+
 
     /*
     // MARK: - Navigation

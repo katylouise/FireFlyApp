@@ -14,7 +14,6 @@ class TableViewCell: UITableViewCell {
   
     @IBOutlet weak var timestampLabel: UILabel!
     
-    @IBOutlet weak var pictureView: UIImageView!
 
   
     override func awakeFromNib() {
