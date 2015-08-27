@@ -5,13 +5,13 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>B3048B9C-D263-4B9F-9756-42CEB0C26B06</string>
+	<string>B7655C07-8E51-4DC6-8867-85577486634A</string>
 	<key>IDESourceControlProjectName</key>
 	<string>FireFly</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>62DC63C93A5A06C0EF7F5FA80EB2CA4BB759480E</key>
-		<string>https://github.com/sivanpatel/FireFlyApp.git</string>
+		<string>github.com:katylouise/FireFlyApp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>FireFly.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/sivanpatel/FireFlyApp.git</string>
+	<string>github.com:katylouise/FireFlyApp.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>62DC63C93A5A06C0EF7F5FA80EB2CA4BB759480E</string>
 			<key>IDESourceControlWCCName</key>
-			<string>FireFlyApp</string>
+			<string>FireFly</string>
 		</dict>
 	</array>
 </dict>

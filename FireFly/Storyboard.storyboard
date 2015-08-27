@@ -8,21 +8,38 @@
         <scene sceneID="9yl-xg-Atm">
             <objects>
                 <tableViewController id="OdO-0g-f0P" customClass="TimelineTableViewController" customModule="FireFly" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="227" sectionHeaderHeight="22" sectionFooterHeight="22" id="Rqe-3W-mha">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="252" sectionHeaderHeight="22" sectionFooterHeight="22" id="Rqe-3W-mha">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="227" id="hZj-l2-Dmo" customClass="TableViewCell" customModule="FireFly" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="252" id="hZj-l2-Dmo" customClass="TableViewCell" customModule="FireFly" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hZj-l2-Dmo" id="aNt-Dh-6hJ">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TWz-ul-wTV">
-                                            <rect key="frame" x="0.0" y="13" width="320" height="227"/>
+                                            <rect key="frame" x="8" y="8" width="304" height="186"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nkf-qQ-TOm">
+                                            <rect key="frame" x="130" y="194" width="182" height="21"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Gm-pl-f9W">
+                                            <rect key="frame" x="13" y="210" width="299" height="42"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="pictureView" destination="TWz-ul-wTV" id="DaX-iT-8K3"/>
+                                    <outlet property="timestampLabel" destination="Nkf-qQ-TOm" id="lJT-a1-ZLi"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -39,13 +56,65 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Wqs-di-Zc2">
                             <connections>
                                 <action selector="addPicture:" destination="OdO-0g-f0P" id="n9L-nK-DJN"/>
+                                <segue destination="zOs-q3-cRV" kind="push" id="qeR-Pi-Gia"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="Rqe-3W-mha" id="5Wb-Lo-8jl"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dal-3c-gLb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="829" y="421"/>
+        </scene>
+        <!--Add Picture View Controller-->
+        <scene sceneID="B2o-3k-Wjm">
+            <objects>
+                <viewController id="zOs-q3-cRV" customClass="AddPictureViewController" customModule="FireFly" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lNv-2Z-a2l"/>
+                        <viewControllerLayoutGuide type="bottom" id="TZa-KU-4K4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fP2-pk-wPX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Cu-JQ-MNg">
+                                <rect key="frame" x="28" y="15" width="265" height="303"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="64V-yr-yUD">
+                                <rect key="frame" x="28" y="331" width="265" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WEO-63-MBi">
+                                <rect key="frame" x="137" y="423" width="50" height="30"/>
+                                <state key="normal" title="Upload">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="upLoadPicture:" destination="zOs-q3-cRV" eventType="touchUpInside" id="BQ8-p9-6JE"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="m2q-Ev-hCz">
+                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="xeV-HP-9Br">
+                            <connections>
+                                <action selector="openPhotoLibrary:" destination="zOs-q3-cRV" id="XLT-GF-BiK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="commentView" destination="64V-yr-yUD" id="mDI-V1-OhF"/>
+                        <outlet property="pictureView" destination="3Cu-JQ-MNg" id="8bf-4L-yuF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4VK-02-CWr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1301" y="421"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2gH-a1-gEn">

@@ -11,12 +11,54 @@ import Parse
 import Bolts
 
 
-class AddPictureViewController: UITableViewController {
+class AddPictureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    var img = UIImagePickerController()
+    @IBOutlet weak var pictureView: UIImageView!
 
+    @IBOutlet weak var commentView: UITextField!
+    
+    @IBAction func openPhotoLibrary(sender: AnyObject) {
+        img.sourceType = .PhotoLibrary;
+        img.allowsEditing = false
+        img.modalPresentationStyle = .Popover
+        presentViewController(img, animated: true, completion: nil)
+    }
+    func imagePickerController(img: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject: AnyObject]) {
+        
+        var pickedImage: UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        pictureView.contentMode = .ScaleAspectFit
+        pictureView.image = pickedImage
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(imgp: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 
+    @IBAction func upLoadPicture(sender: AnyObject) {
+        let imageData = UIImagePNGRepresentation(pictureView.image)
+        let imageFile = PFFile(data:imageData)
+        var userPhoto = PFObject(className:"Images")
+        userPhoto["owner"] = PFUser.currentUser()
+        userPhoto["imageComment"] = commentView.text
+        userPhoto["imageFile"] = imageFile
+        userPhoto.saveInBackgroundWithBlock({
+            (success:Bool, error:NSError?) -> Void in
+            if success {
+            self.navigationController?.popToRootViewControllerAnimated(true)
+            } else {
+                println("error!")
+            }
+        })
+        
+//        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        img.delegate = self
         // Do any additional setup after loading the view.
     }
 

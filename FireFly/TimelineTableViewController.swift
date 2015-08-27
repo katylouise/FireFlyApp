@@ -11,21 +11,65 @@ import Parse
 import Bolts
 import MobileCoreServices
 
-class TimelineTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-  var img = UIImagePickerController()
-  
-  
-  @IBAction func addPicture(sender: AnyObject) {
+class TimelineTableViewController:
+UITableViewController {
+    var timelineData = [UIImage] ()
     
-    img.sourceType = .PhotoLibrary;
-    img.mediaTypes = [kUTTypeImage as String]
-    img.allowsEditing = false
-    img.modalPresentationStyle = .Popover
-    self.presentViewController(img, animated: true, completion: nil)
+    func loadData() {
+        timelineData.removeAll()
+        println("\(timelineData.count)")
+        
+        var query = PFQuery(className:"Images")
+        
+        query.findObjectsInBackgroundWithBlock {
+            (objects:[AnyObject]?, error:NSError?) -> Void in
+            
+            if error == nil {
+                for object in objects! {
+                    let userPicture = object["imageFile"] as! PFFile
+                    userPicture.getDataInBackgroundWithBlock({
+                        (imageData: NSData?, error: NSError?) -> Void in
+                        if (error == nil) {
+                            let image = UIImage(data:imageData!)
+                            self.timelineData.append(image!)
+                            
+                            self.tableView.reloadData()
+                            println("reloaded")
+                        }
+                    })
+                }
+            }
+            println("string-check!")
 
-}
+        }
+//        
+//        var anotherPhoto = PFObject(className: "Images")
+//        let findTimelineData = anotherPhoto["Images"] as! PFFile
+//        
+//        findTimelineData.getDataInBackgroundWithBlock {
+//            //this request happens asynchronously
+//            (imageData: NSData?, error:NSError?) -> Void in
+//            //changed arguments to pass build
+//            
+//            if (error == nil) {
+//                for object in imageData! {
+//                    self.timelineData.addObject(object)
+//                }
+//                
+//                let array:NSArray = self.timelineData.reverseObjectEnumerator().allObjects
+//                self.timelineData = array.mutableCopy() as! NSMutableArray //changed this line to pass build
+//                
+//                self.tableView.reloadData()
+//            }
+//        }
+    }
+    
 
   override func viewDidAppear(animated: Bool) {
+    self.loadData()
+    println("\(self.timelineData.count) counted on page load")
+
+    
     if (PFUser.currentUser() == nil) {
       var loginAlert:UIAlertController = UIAlertController(title: "Sign Up/Login", message: "Log in", preferredStyle: UIAlertControllerStyle.Alert)
       loginAlert.addTextFieldWithConfigurationHandler({
@@ -89,7 +133,7 @@ class TimelineTableViewController: UITableViewController, UIImagePickerControlle
     override func viewDidLoad() {
         super.viewDidLoad()
       
-        img.delegate = self
+ 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -108,13 +152,14 @@ class TimelineTableViewController: UITableViewController, UIImagePickerControlle
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        println("\(timelineData.count)")
+        return timelineData.count
     }
 
     @IBAction func logout(sender: AnyObject) {
@@ -125,24 +170,21 @@ class TimelineTableViewController: UITableViewController, UIImagePickerControlle
   
 
   
-  
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-      var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
-          println("Anything")
-      func imagePickerController(picker: UIImagePickerController, didFinishPickingImageMediaWithInfo info: [NSObject: AnyObject]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
-          println("Image picked!")
-          cell.contentMode = .ScaleAspectFit
-          cell.imageView!.image = pickedImage
-        }
-        dismissViewControllerAnimated(true, completion: nil)
-      }
-      
-      func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismissViewControllerAnimated(true, completion: nil)
-      }
-      
-        return cell
+
+    override func tableView(tableView: UITableView?, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell:TableViewCell = tableView!.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TableViewCell
+        let imageFile:UIImage = self.timelineData[indexPath.row] as UIImage
+        
+        cell.pictureView.image = imageFile as UIImage
+
+        
+//        
+//        var dataFormatter:NSDateFormatter = NSDateFormatter()
+//        dataFormatter.dateFormat = "dd-MM-yyyy"
+//        cell.timestampLabel.text = dataFormatter.stringFromDate(imageFile.createdAt!)
+        
+             return cell
     }
 
 

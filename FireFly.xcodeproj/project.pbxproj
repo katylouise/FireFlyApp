@@ -26,8 +26,8 @@
 		0D6C2DF71B8DF12000D3A70A /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6C2DF61B8DF12000D3A70A /* TableViewCell.swift */; };
 		0D6C2DF91B8DF13F00D3A70A /* AddPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6C2DF81B8DF13F00D3A70A /* AddPictureViewController.swift */; };
 		0D6C2DFB1B8DF15B00D3A70A /* TimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6C2DFA1B8DF15B00D3A70A /* TimelineTableViewController.swift */; };
-		97394EC01B8DF43A0095E69D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97394EBF1B8DF43A0095E69D /* Bolts.framework */; };
-		97394EC21B8DF4410095E69D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97394EC11B8DF4410095E69D /* Parse.framework */; };
+		0D6C2DFE1B8E512E00D3A70A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D6C2DFC1B8E512E00D3A70A /* Bolts.framework */; };
+		0D6C2DFF1B8E512E00D3A70A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D6C2DFD1B8E512E00D3A70A /* Parse.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,8 +64,8 @@
 		0D6C2DF61B8DF12000D3A70A /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		0D6C2DF81B8DF13F00D3A70A /* AddPictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPictureViewController.swift; sourceTree = "<group>"; };
 		0D6C2DFA1B8DF15B00D3A70A /* TimelineTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableViewController.swift; sourceTree = "<group>"; };
-		97394EBF1B8DF43A0095E69D /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		97394EC11B8DF4410095E69D /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		0D6C2DFC1B8E512E00D3A70A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		0D6C2DFD1B8E512E00D3A70A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,9 +81,9 @@
 				0D6C2DDB1B8DEB5000D3A70A /* QuartzCore.framework in Frameworks */,
 				0D6C2DD91B8DEB4900D3A70A /* CoreLocation.framework in Frameworks */,
 				0D6C2DD71B8DEB4200D3A70A /* CoreGraphics.framework in Frameworks */,
-				97394EC01B8DF43A0095E69D /* Bolts.framework in Frameworks */,
+				0D6C2DFE1B8E512E00D3A70A /* Bolts.framework in Frameworks */,
 				0D6C2DD51B8DEB3900D3A70A /* CFNetwork.framework in Frameworks */,
-				97394EC21B8DF4410095E69D /* Parse.framework in Frameworks */,
+				0D6C2DFF1B8E512E00D3A70A /* Parse.framework in Frameworks */,
 				0D6C2DD31B8DEB3300D3A70A /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -103,8 +103,8 @@
 			children = (
 				0D6C2DE41B8DEB8000D3A70A /* libsqlite3.dylib */,
 				0D6C2DE21B8DEB7700D3A70A /* libz.dylib */,
-				97394EC11B8DF4410095E69D /* Parse.framework */,
-				97394EBF1B8DF43A0095E69D /* Bolts.framework */,
+				0D6C2DFC1B8E512E00D3A70A /* Bolts.framework */,
+				0D6C2DFD1B8E512E00D3A70A /* Parse.framework */,
 				0D6C2DE01B8DEB6F00D3A70A /* SystemConfiguration.framework */,
 				0D6C2DDE1B8DEB6500D3A70A /* StoreKit.framework */,
 				0D6C2DDC1B8DEB5D00D3A70A /* Security.framework */,
