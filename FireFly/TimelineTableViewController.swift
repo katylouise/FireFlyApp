@@ -14,24 +14,27 @@ import MobileCoreServices
 class TimelineTableViewController:
 UITableViewController {
     var timelineData = [UIImage] ()
+    var timeData:NSMutableArray = []
     
     func loadData() {
         timelineData.removeAll()
         println("\(timelineData.count)")
         
-        var query = PFQuery(className:"Images")
+        var query = PFQuery(className:"Images").orderByDescending("createdAt")
         
         query.findObjectsInBackgroundWithBlock {
             (objects:[AnyObject]?, error:NSError?) -> Void in
             
             if error == nil {
                 for object in objects! {
+                    self.timeData.addObject(object)
                     let userPicture = object["imageFile"] as! PFFile
                     userPicture.getDataInBackgroundWithBlock({
                         (imageData: NSData?, error: NSError?) -> Void in
                         if (error == nil) {
                             let image = UIImage(data:imageData!)
                             self.timelineData.append(image!)
+                            
                             
                             self.tableView.reloadData()
                             println("reloaded")
@@ -175,15 +178,13 @@ UITableViewController {
         
         let cell:TableViewCell = tableView!.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TableViewCell
         let imageFile:UIImage = self.timelineData[indexPath.row] as UIImage
-        
+        let timeData:PFObject = self.timeData.objectAtIndex(indexPath.row) as! PFObject
         cell.pictureView.image = imageFile as UIImage
 
         
-//        
-//        var dataFormatter:NSDateFormatter = NSDateFormatter()
-//        dataFormatter.dateFormat = "dd-MM-yyyy"
-//        cell.timestampLabel.text = dataFormatter.stringFromDate(imageFile.createdAt!)
-        
+        var dataFormatter:NSDateFormatter = NSDateFormatter()
+        dataFormatter.dateFormat = "HH:mm dd-MM-yyyy"
+        cell.timestampLabel.text = dataFormatter.stringFromDate(timeData.createdAt!)
              return cell
     }
 
