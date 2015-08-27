@@ -37,6 +37,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="commentLabel" destination="7Gm-pl-f9W" id="lkE-g0-CE7"/>
                                     <outlet property="pictureView" destination="TWz-ul-wTV" id="DaX-iT-8K3"/>
                                     <outlet property="timestampLabel" destination="Nkf-qQ-TOm" id="lJT-a1-ZLi"/>
                                 </connections>

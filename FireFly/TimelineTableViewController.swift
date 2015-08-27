@@ -14,10 +14,11 @@ import MobileCoreServices
 class TimelineTableViewController:
 UITableViewController {
     var timelineData = [UIImage] ()
-    var timeData:NSMutableArray = []
+    var timeData = [PFObject] ()
     
     func loadData() {
         timelineData.removeAll()
+        timeData.removeAll()
         println("\(timelineData.count)")
         
         var query = PFQuery(className:"Images").orderByDescending("createdAt")
@@ -26,9 +27,15 @@ UITableViewController {
             (objects:[AnyObject]?, error:NSError?) -> Void in
             
             if error == nil {
+                
                 for object in objects! {
-                    self.timeData.addObject(object)
+//                    self.timeData.addObject(object)
+                    
+                    self.timeData.append(object as! PFObject)
+                    println("\(self.timeData)")
+                    
                     let userPicture = object["imageFile"] as! PFFile
+                    
                     userPicture.getDataInBackgroundWithBlock({
                         (imageData: NSData?, error: NSError?) -> Void in
                         if (error == nil) {
@@ -37,34 +44,13 @@ UITableViewController {
                             
                             
                             self.tableView.reloadData()
-                            println("reloaded")
                         }
                     })
                 }
             }
-            println("string-check!")
 
         }
-//        
-//        var anotherPhoto = PFObject(className: "Images")
-//        let findTimelineData = anotherPhoto["Images"] as! PFFile
-//        
-//        findTimelineData.getDataInBackgroundWithBlock {
-//            //this request happens asynchronously
-//            (imageData: NSData?, error:NSError?) -> Void in
-//            //changed arguments to pass build
-//            
-//            if (error == nil) {
-//                for object in imageData! {
-//                    self.timelineData.addObject(object)
-//                }
-//                
-//                let array:NSArray = self.timelineData.reverseObjectEnumerator().allObjects
-//                self.timelineData = array.mutableCopy() as! NSMutableArray //changed this line to pass build
-//                
-//                self.tableView.reloadData()
-//            }
-//        }
+
     }
     
 
@@ -178,14 +164,18 @@ UITableViewController {
         
         let cell:TableViewCell = tableView!.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TableViewCell
         let imageFile:UIImage = self.timelineData[indexPath.row] as UIImage
-        let timeData:PFObject = self.timeData.objectAtIndex(indexPath.row) as! PFObject
+        var timeData2:PFObject = self.timeData[indexPath.row] as PFObject
         cell.pictureView.image = imageFile as UIImage
 
         
         var dataFormatter:NSDateFormatter = NSDateFormatter()
         dataFormatter.dateFormat = "HH:mm dd-MM-yyyy"
-        cell.timestampLabel.text = dataFormatter.stringFromDate(timeData.createdAt!)
-             return cell
+        cell.timestampLabel.text = dataFormatter.stringFromDate(timeData2.createdAt!)
+        cell.commentLabel.text = timeData2["imageComment"] as? String
+        
+//        var imageCapture = timedata2["imageFile"]
+        
+        return cell
     }
 
 

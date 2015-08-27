@@ -12,10 +12,10 @@ import Bolts
 
 class TableViewCell: UITableViewCell {
 
-//    @IBOutlet weak var commentLabel: UILabel!
   
     @IBOutlet weak var timestampLabel: UILabel!
     
+    @IBOutlet weak var commentLabel: UILabel!
 
     @IBOutlet weak var pictureView: UIImageView!
   
