@@ -15,15 +15,14 @@ class TimelineTableViewController:
 UITableViewController {
     var imagesArray = [PFFile]()
     var captionsArray = [String]()
-//    var timelineData = [UIImage] ()
     var timeData = [NSDate]()
+    var imgObjects = [PFObject]()
     
     func loadData() {
         imagesArray.removeAll()
         captionsArray.removeAll()
-//        timelineData.removeAll()
+        imgObjects.removeAll()
         timeData.removeAll()
-//        println("\(timelineData.count)")
         
         var query = PFQuery(className:"Images").orderByDescending("createdAt")
         
@@ -33,24 +32,13 @@ UITableViewController {
             if error == nil {
                 
                 for object in objects! {
-//                    self.timeData.addObject(object)
                     self.imagesArray.append(object["imageFile"] as! PFFile)
                     self.captionsArray.append(object["imageComment"] as! String)
                     self.timeData.append(object.createdAt as NSDate!!)
-//                    println("\(self.timeData)")
-//                    
-//                    let userPicture = object["imageFile"] as! PFFile
-//                    
-//                    userPicture.getDataInBackgroundWithBlock({
-//                        (imageData: NSData?, error: NSError?) -> Void in
-//                        if (error == nil) {
-//                            let image = UIImage(data:imageData!)
-//                            self.timelineData.append(image!)
-                    
+                    self.imgObjects.append(object as! PFObject)
                             
-                            self.tableView.reloadData()
-//                        }
-//                    })
+                    self.tableView.reloadData()
+
                 }
             }
 
@@ -61,8 +49,6 @@ UITableViewController {
 
   override func viewDidAppear(animated: Bool) {
     self.loadData()
-//    println("\(self.timelineData.count) counted on page load")
-
     
     if (PFUser.currentUser() == nil) {
       var loginAlert:UIAlertController = UIAlertController(title: "Sign Up/Login", message: "Log in", preferredStyle: UIAlertControllerStyle.Alert)
@@ -86,7 +72,7 @@ UITableViewController {
           if user != nil {
             println("Login successful")
           } else {
-            println("Login failed")
+            self.viewDidAppear(true)
           }
         }
       }))
@@ -108,15 +94,15 @@ UITableViewController {
             println("\(error)")
           }
         }
-        
-        PFUser.logInWithUsernameInBackground(usernameTextField.text, password: passwordTextField.text){
-          (user:PFUser?, error:NSError?)-> Void in
-          if user != nil {
-            println("Login successful")
-          } else {
-            println("Login failed")
-          }
-        }
+//        
+//        PFUser.logInWithUsernameInBackground(usernameTextField.text, password: passwordTextField.text){
+//          (user:PFUser?, error:NSError?)-> Void in
+//          if user != nil {
+//            println("Login successful")
+//          } else {
+//            println("Login failed")
+//          }
+//        }
       }))
       
       self.presentViewController(loginAlert, animated: true, completion: nil)
@@ -168,13 +154,11 @@ UITableViewController {
     override func tableView(tableView: UITableView?, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:TableViewCell = tableView!.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TableViewCell
-//        let imageFile:UIImage = self.timelineData[indexPath.row] as UIImage
-//        var timeData2:PFObject = self.timeData[indexPath.row] as PFObject
-//        cell.pictureView.image = imageFile as UIImage
         
         var imageToDisplay = self.imagesArray[indexPath.row] as PFFile
         var comment = self.captionsArray[indexPath.row] as String
         var timeStamp = self.timeData[indexPath.row] as NSDate
+        var singleImageObject = self.imgObjects[indexPath.row] as PFObject
         
         var dataFormatter:NSDateFormatter = NSDateFormatter()
         dataFormatter.dateFormat = "HH:mm dd-MM-yyyy"
@@ -184,7 +168,22 @@ UITableViewController {
         var imageData = imageToDisplay.getData()
         var finalImage = UIImage(data: imageData!)
         cell.pictureView.image = finalImage
-//        var imageCapture = timedata2["imageFile"]
+        
+        var findOwner:PFQuery = PFUser.query()!
+        findOwner.whereKey("objectId", equalTo: singleImageObject["owner"]!.objectId!!)
+        //is this line right?? TWO exclamation marks??
+        
+        findOwner.findObjectsInBackgroundWithBlock {
+            (objects:[AnyObject]?, error:NSError?) -> Void in
+            
+            if error == nil {
+                let owner:PFUser = (objects! as NSArray).lastObject as! PFUser
+                //add bang to objects to cast as type NSArray
+                //there is actually only one obj in this array
+                cell.usernameLabel.text = owner.username
+            }
+        }
+
         
         return cell
     }

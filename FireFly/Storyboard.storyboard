@@ -34,12 +34,19 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2u-DO-Cug">
+                                            <rect key="frame" x="13" y="194" width="146" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="commentLabel" destination="7Gm-pl-f9W" id="lkE-g0-CE7"/>
                                     <outlet property="pictureView" destination="TWz-ul-wTV" id="DaX-iT-8K3"/>
                                     <outlet property="timestampLabel" destination="Nkf-qQ-TOm" id="lJT-a1-ZLi"/>
+                                    <outlet property="usernameLabel" destination="r2u-DO-Cug" id="czM-1c-VUn"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

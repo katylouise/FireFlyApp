@@ -17,6 +17,7 @@ class TableViewCell: UITableViewCell {
     
     @IBOutlet weak var commentLabel: UILabel!
 
+    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var pictureView: UIImageView!
   
     override func awakeFromNib() {
