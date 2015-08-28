@@ -166,28 +166,20 @@ UITableViewController {
         var comment = self.captionsArray[indexPath.row] as String
         var timeStamp = self.timeData[indexPath.row] as NSDate
         var singleImageObject = self.imgObjects[indexPath.row] as PFObject
-        var like = self.likes[indexPath.row] as Int
+//        var like = self.likes[indexPath.row] as Int
         cell.likeObject = singleImageObject
         
         var dataFormatter:NSDateFormatter = NSDateFormatter()
         dataFormatter.dateFormat = "HH:mm dd-MM-yyyy"
         cell.timestampLabel.text = dataFormatter.stringFromDate(timeStamp)
         cell.commentLabel.text = comment
+        var like = singleImageObject["likes"] as! Int
         cell.likeCounter.text = "\(like) likes"
-        
-        
         
         imageToDisplay.getDataInBackgroundWithBlock {
             (data:NSData?, error:NSError?) -> Void in
             cell.pictureView.image = UIImage(data:data!)
         }
-        
-        
-//        var imageData = imageToDisplay.getData()
-//        var finalImage = UIImage(data: imageData!)
-//        cell.pictureView.image = finalImage
-  
-        
         
         var findOwner:PFQuery = PFUser.query()!
         findOwner.whereKey("objectId", equalTo: singleImageObject["owner"]!.objectId!!)
