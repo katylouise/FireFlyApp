@@ -16,6 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+          UINavigationBar.appearance().barTintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1)
+        
         Parse.enableLocalDatastore()
         Parse.setApplicationId("yQ9ARKDFZjy9S3Qz3Va9uT76AbQm7rok6tL8YcwJ", clientKey: "8VmUpqJfqdXlxRBRPD5DDBcGLuXQsazysWEx9kEw")
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)

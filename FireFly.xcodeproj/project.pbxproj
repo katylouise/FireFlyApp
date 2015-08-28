@@ -28,6 +28,7 @@
 		0D6C2DFB1B8DF15B00D3A70A /* TimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6C2DFA1B8DF15B00D3A70A /* TimelineTableViewController.swift */; };
 		0D6C2DFE1B8E512E00D3A70A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D6C2DFC1B8E512E00D3A70A /* Bolts.framework */; };
 		0D6C2DFF1B8E512E00D3A70A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D6C2DFD1B8E512E00D3A70A /* Parse.framework */; };
+		0DE659D11B90E6E100F1F65F /* VarelaRound-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DE659D01B90E6E100F1F65F /* VarelaRound-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		0D6C2DFA1B8DF15B00D3A70A /* TimelineTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableViewController.swift; sourceTree = "<group>"; };
 		0D6C2DFC1B8E512E00D3A70A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		0D6C2DFD1B8E512E00D3A70A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		0DE659D01B90E6E100F1F65F /* VarelaRound-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VarelaRound-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 		0D6C2DB01B8DEB2000D3A70A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0DE659D01B90E6E100F1F65F /* VarelaRound-Regular.ttf */,
 				0D6C2DB11B8DEB2000D3A70A /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -250,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D6C2DBD1B8DEB2000D3A70A /* LaunchScreen.xib in Resources */,
+				0DE659D11B90E6E100F1F65F /* VarelaRound-Regular.ttf in Resources */,
 				0D6C2DBA1B8DEB2000D3A70A /* Images.xcassets in Resources */,
 				0D6C2DF51B8DECDD00D3A70A /* Storyboard.storyboard in Resources */,
 			);

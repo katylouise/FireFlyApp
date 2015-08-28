@@ -117,6 +117,9 @@ UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.reloadData()
  
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -172,9 +175,19 @@ UITableViewController {
         cell.commentLabel.text = comment
         cell.likeCounter.text = "\(like) likes"
         
-        var imageData = imageToDisplay.getData()
-        var finalImage = UIImage(data: imageData!)
-        cell.pictureView.image = finalImage
+        
+        
+        imageToDisplay.getDataInBackgroundWithBlock {
+            (data:NSData?, error:NSError?) -> Void in
+            cell.pictureView.image = UIImage(data:data!)
+        }
+        
+        
+//        var imageData = imageToDisplay.getData()
+//        var finalImage = UIImage(data: imageData!)
+//        cell.pictureView.image = finalImage
+  
+        
         
         var findOwner:PFQuery = PFUser.query()!
         findOwner.whereKey("objectId", equalTo: singleImageObject["owner"]!.objectId!!)
@@ -191,6 +204,10 @@ UITableViewController {
             }
         }
 
+        cell.pictureView.layer.borderColor = UIColor.blackColor().CGColor
+        cell.pictureView.layer.borderWidth = 2
+        cell.pictureView.layer.cornerRadius = 10
+        cell.pictureView.clipsToBounds = true
         
         return cell
     }
