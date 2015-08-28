@@ -38,23 +38,32 @@ class AddPictureViewController: UIViewController, UIImagePickerControllerDelegat
     }
 
     @IBAction func upLoadPicture(sender: AnyObject) {
-        let imageData = UIImagePNGRepresentation(pictureView.image)
-        let imageFile = PFFile(data:imageData)
-        var userPhoto = PFObject(className:"Images")
-        userPhoto["owner"] = PFUser.currentUser()
-        userPhoto["imageComment"] = commentView.text
-        userPhoto["imageFile"] = imageFile
-        userPhoto["likes"] = 0
-        userPhoto.saveInBackgroundWithBlock({
-            (success:Bool, error:NSError?) -> Void in
-            if success {
-            self.navigationController?.popToRootViewControllerAnimated(true)
-            } else {
-                println("error!")
-            }
-        })
+//        let imageData =
+        if let imageData = UIImagePNGRepresentation(pictureView.image) {
+            let imageFile = PFFile(data:imageData)
+            var userPhoto = PFObject(className:"Images")
+            userPhoto["owner"] = PFUser.currentUser()
+            userPhoto["imageComment"] = commentView.text
+            userPhoto["imageFile"] = imageFile
+            userPhoto["likes"] = 0
+            
+            userPhoto.saveInBackgroundWithBlock({
+                (success:Bool, error:NSError?) -> Void in
+                if success {
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+                } else {
+                    println("error!")
+                }
+            })
+        } else {
+            
+//        let imageData = UIImagePNGRepresentation(pictureView.image)
         
-//        self.navigationController?.popToRootViewControllerAnimated(true)
+        var uploadError:UIAlertController = UIAlertController(title: "Upload Error", message: "Please select a picture from your gallery to upload!", preferredStyle: UIAlertControllerStyle.Alert)
+        var defaultAction = UIAlertAction(title:"OK", style: UIAlertActionStyle.Default, handler: nil)
+        uploadError.addAction(defaultAction)
+        presentViewController(uploadError, animated: true, completion: nil)
+        }
     }
     
     override func viewDidLoad() {

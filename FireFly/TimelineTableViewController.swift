@@ -24,6 +24,7 @@ UITableViewController {
         captionsArray.removeAll()
         imgObjects.removeAll()
         timeData.removeAll()
+        likes.removeAll()
         
         var query = PFQuery(className:"Images").orderByDescending("createdAt")
         
@@ -54,10 +55,11 @@ UITableViewController {
     
     if (PFUser.currentUser() == nil) {
       var loginAlert:UIAlertController = UIAlertController(title: "Sign Up/Login", message: "Log in", preferredStyle: UIAlertControllerStyle.Alert)
-      loginAlert.addTextFieldWithConfigurationHandler({
-        textfield in
-          textfield.placeholder = "User Name"
-      })
+      
+        loginAlert.addTextFieldWithConfigurationHandler({
+            textfield in
+            textfield.placeholder = "User Name"
+        })
       loginAlert.addTextFieldWithConfigurationHandler({
       textfield in
         textfield.placeholder = "Password"
