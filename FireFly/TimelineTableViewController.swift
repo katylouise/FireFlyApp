@@ -13,13 +13,17 @@ import MobileCoreServices
 
 class TimelineTableViewController:
 UITableViewController {
-    var timelineData = [UIImage] ()
-    var timeData = [PFObject] ()
+    var imagesArray = [PFFile]()
+    var captionsArray = [String]()
+//    var timelineData = [UIImage] ()
+    var timeData = [NSDate]()
     
     func loadData() {
-        timelineData.removeAll()
+        imagesArray.removeAll()
+        captionsArray.removeAll()
+//        timelineData.removeAll()
         timeData.removeAll()
-        println("\(timelineData.count)")
+//        println("\(timelineData.count)")
         
         var query = PFQuery(className:"Images").orderByDescending("createdAt")
         
@@ -30,22 +34,23 @@ UITableViewController {
                 
                 for object in objects! {
 //                    self.timeData.addObject(object)
+                    self.imagesArray.append(object["imageFile"] as! PFFile)
+                    self.captionsArray.append(object["imageComment"] as! String)
+                    self.timeData.append(object.createdAt as NSDate!!)
+//                    println("\(self.timeData)")
+//                    
+//                    let userPicture = object["imageFile"] as! PFFile
+//                    
+//                    userPicture.getDataInBackgroundWithBlock({
+//                        (imageData: NSData?, error: NSError?) -> Void in
+//                        if (error == nil) {
+//                            let image = UIImage(data:imageData!)
+//                            self.timelineData.append(image!)
                     
-                    self.timeData.append(object as! PFObject)
-                    println("\(self.timeData)")
-                    
-                    let userPicture = object["imageFile"] as! PFFile
-                    
-                    userPicture.getDataInBackgroundWithBlock({
-                        (imageData: NSData?, error: NSError?) -> Void in
-                        if (error == nil) {
-                            let image = UIImage(data:imageData!)
-                            self.timelineData.append(image!)
-                            
                             
                             self.tableView.reloadData()
-                        }
-                    })
+//                        }
+//                    })
                 }
             }
 
@@ -56,7 +61,7 @@ UITableViewController {
 
   override func viewDidAppear(animated: Bool) {
     self.loadData()
-    println("\(self.timelineData.count) counted on page load")
+//    println("\(self.timelineData.count) counted on page load")
 
     
     if (PFUser.currentUser() == nil) {
@@ -147,8 +152,8 @@ UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        println("\(timelineData.count)")
-        return timelineData.count
+        println("\(imagesArray.count)")
+        return imagesArray.count
     }
 
     @IBAction func logout(sender: AnyObject) {
@@ -163,16 +168,22 @@ UITableViewController {
     override func tableView(tableView: UITableView?, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:TableViewCell = tableView!.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TableViewCell
-        let imageFile:UIImage = self.timelineData[indexPath.row] as UIImage
-        var timeData2:PFObject = self.timeData[indexPath.row] as PFObject
-        cell.pictureView.image = imageFile as UIImage
-
+//        let imageFile:UIImage = self.timelineData[indexPath.row] as UIImage
+//        var timeData2:PFObject = self.timeData[indexPath.row] as PFObject
+//        cell.pictureView.image = imageFile as UIImage
+        
+        var imageToDisplay = self.imagesArray[indexPath.row] as PFFile
+        var comment = self.captionsArray[indexPath.row] as String
+        var timeStamp = self.timeData[indexPath.row] as NSDate
         
         var dataFormatter:NSDateFormatter = NSDateFormatter()
         dataFormatter.dateFormat = "HH:mm dd-MM-yyyy"
-        cell.timestampLabel.text = dataFormatter.stringFromDate(timeData2.createdAt!)
-        cell.commentLabel.text = timeData2["imageComment"] as? String
+        cell.timestampLabel.text = dataFormatter.stringFromDate(timeStamp)
+        cell.commentLabel.text = comment
         
+        var imageData = imageToDisplay.getData()
+        var finalImage = UIImage(data: imageData!)
+        cell.pictureView.image = finalImage
 //        var imageCapture = timedata2["imageFile"]
         
         return cell
