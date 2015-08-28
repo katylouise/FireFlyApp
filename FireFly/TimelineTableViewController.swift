@@ -17,6 +17,7 @@ UITableViewController {
     var captionsArray = [String]()
     var timeData = [NSDate]()
     var imgObjects = [PFObject]()
+    var likes = [Int]()
     
     func loadData() {
         imagesArray.removeAll()
@@ -36,6 +37,7 @@ UITableViewController {
                     self.captionsArray.append(object["imageComment"] as! String)
                     self.timeData.append(object.createdAt as NSDate!!)
                     self.imgObjects.append(object as! PFObject)
+                    self.likes.append(object["likes"] as! Int)
                             
                     self.tableView.reloadData()
 
@@ -159,11 +161,14 @@ UITableViewController {
         var comment = self.captionsArray[indexPath.row] as String
         var timeStamp = self.timeData[indexPath.row] as NSDate
         var singleImageObject = self.imgObjects[indexPath.row] as PFObject
+        var like = self.likes[indexPath.row] as Int
+        cell.likeObject = singleImageObject
         
         var dataFormatter:NSDateFormatter = NSDateFormatter()
         dataFormatter.dateFormat = "HH:mm dd-MM-yyyy"
         cell.timestampLabel.text = dataFormatter.stringFromDate(timeStamp)
         cell.commentLabel.text = comment
+        cell.likeCounter.text = "\(like) likes"
         
         var imageData = imageToDisplay.getData()
         var finalImage = UIImage(data: imageData!)

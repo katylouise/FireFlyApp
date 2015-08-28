@@ -44,6 +44,7 @@ class AddPictureViewController: UIViewController, UIImagePickerControllerDelegat
         userPhoto["owner"] = PFUser.currentUser()
         userPhoto["imageComment"] = commentView.text
         userPhoto["imageFile"] = imageFile
+        userPhoto["likes"] = 0
         userPhoto.saveInBackgroundWithBlock({
             (success:Bool, error:NSError?) -> Void in
             if success {

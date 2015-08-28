@@ -12,7 +12,7 @@ import Bolts
 
 class TableViewCell: UITableViewCell {
 
-  
+
     @IBOutlet weak var timestampLabel: UILabel!
     
     @IBOutlet weak var commentLabel: UILabel!
@@ -22,6 +22,9 @@ class TableViewCell: UITableViewCell {
     
     @IBOutlet weak var penguinIcon: UIImageView!
     
+    @IBOutlet weak var likeCounter: UILabel!
+    
+    var likeObject:PFObject?
   
     override func awakeFromNib() {
         let gesture = UITapGestureRecognizer(target: self, action: Selector("onDoubleTap:"))
@@ -36,12 +39,21 @@ class TableViewCell: UITableViewCell {
     func onDoubleTap(sender:AnyObject){
         penguinIcon?.hidden = false
         penguinIcon?.alpha = 1.0
-        UIView.animateWithDuration(1.0, delay:1.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+        UIView.animateWithDuration(0.5, delay:0.5, options: UIViewAnimationOptions.CurveEaseIn, animations: {
             self.penguinIcon?.alpha = 0
             }, completion:{
                 (value:Bool) in
                 self.penguinIcon?.hidden = true
         })
+        
+        if likeObject != nil {
+            if var likes:Int? = likeObject!.objectForKey("likes") as? Int {
+                likes!++
+                likeObject?.setObject(likes!, forKey: "likes");
+                likeObject?.saveInBackground();
+                likeCounter.text = "\(likes!) likes"
+            }
+        }
         
     }
     
