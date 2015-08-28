@@ -20,6 +20,10 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TWz-ul-wTV">
                                             <rect key="frame" x="8" y="8" width="304" height="186"/>
+                                            <gestureRecognizers/>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="V73-pd-LQg" appends="YES" id="2JK-9n-3vb"/>
+                                            </connections>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nkf-qQ-TOm">
                                             <rect key="frame" x="130" y="194" width="182" height="21"/>
@@ -40,10 +44,14 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Penguin" translatesAutoresizingMaskIntoConstraints="NO" id="bJd-lc-Cqg">
+                                            <rect key="frame" x="64" y="50" width="193" height="102"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="commentLabel" destination="7Gm-pl-f9W" id="lkE-g0-CE7"/>
+                                    <outlet property="penguinIcon" destination="bJd-lc-Cqg" id="RE9-n8-RKO"/>
                                     <outlet property="pictureView" destination="TWz-ul-wTV" id="DaX-iT-8K3"/>
                                     <outlet property="timestampLabel" destination="Nkf-qQ-TOm" id="lJT-a1-ZLi"/>
                                     <outlet property="usernameLabel" destination="r2u-DO-Cug" id="czM-1c-VUn"/>
@@ -73,6 +81,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dal-3c-gLb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="V73-pd-LQg"/>
             </objects>
             <point key="canvasLocation" x="829" y="421"/>
         </scene>
@@ -143,6 +152,9 @@
             <point key="canvasLocation" x="297" y="421"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Penguin" width="626" height="556"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
