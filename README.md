@@ -1,7 +1,7 @@
 FireFly
 ========
 
-This is a picture sharing app built in a couple of days with an aim to learn the basics of Swift.  It was built in XCode with Parse as a database.  Both of these technologies were also new to me at the time, so that added to the steep learning curve!
+This is a picture sharing app built in a couple of days in a small team with an aim to learning the basics of Swift.  It was built in XCode with Parse as a database.  Both of these technologies were also new to us at the time, so that added to the steep learning curve!
 
 Learning
 ---------
