@@ -55,7 +55,7 @@ class AddPictureViewController: UIViewController, UIImagePickerControllerDelegat
                 }
             })
         } else {
-        
+
         var uploadError:UIAlertController = UIAlertController(title: "Upload Error", message: "Please select a picture from your gallery to upload!", preferredStyle: UIAlertControllerStyle.Alert)
         var defaultAction = UIAlertAction(title:"OK", style: UIAlertActionStyle.Default, handler: nil)
         uploadError.addAction(defaultAction)

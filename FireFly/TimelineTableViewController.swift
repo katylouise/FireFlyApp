@@ -44,7 +44,11 @@ UITableViewController {
             }
         }
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 19b6685391890c13c45d329c94edcb27db7001d9
   override func viewDidAppear(animated: Bool) {
     self.loadData()
     
@@ -137,7 +141,11 @@ UITableViewController {
       var currentUser = PFUser.currentUser()
       self.viewDidAppear(true)
     }
+<<<<<<< HEAD
   
+=======
+ 
+>>>>>>> 19b6685391890c13c45d329c94edcb27db7001d9
     override func tableView(tableView: UITableView?, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:TableViewCell = tableView!.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TableViewCell
@@ -162,7 +170,10 @@ UITableViewController {
         
         var findOwner:PFQuery = PFUser.query()!
         findOwner.whereKey("objectId", equalTo: singleImageObject["owner"]!.objectId!!)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 19b6685391890c13c45d329c94edcb27db7001d9
         
         findOwner.findObjectsInBackgroundWithBlock {
             (objects:[AnyObject]?, error:NSError?) -> Void in
