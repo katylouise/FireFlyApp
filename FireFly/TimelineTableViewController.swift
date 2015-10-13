@@ -39,16 +39,11 @@ UITableViewController {
                     self.timeData.append(object.createdAt as NSDate!!)
                     self.imgObjects.append(object as! PFObject)
                     self.likes.append(object["likes"] as! Int)
-                            
                     self.tableView.reloadData()
-
                 }
             }
-
         }
-
     }
-    
 
   override func viewDidAppear(animated: Bool) {
     self.loadData()
@@ -98,21 +93,10 @@ UITableViewController {
             println("\(error)")
           }
         }
-//        
-//        PFUser.logInWithUsernameInBackground(usernameTextField.text, password: passwordTextField.text){
-//          (user:PFUser?, error:NSError?)-> Void in
-//          if user != nil {
-//            println("Login successful")
-//          } else {
-//            println("Login failed")
-//          }
-//        }
       }))
-      
       self.presentViewController(loginAlert, animated: true, completion: nil)
     }
   }
-  
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,7 +111,6 @@ UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -155,9 +138,6 @@ UITableViewController {
       self.viewDidAppear(true)
     }
   
-
-  
-
     override func tableView(tableView: UITableView?, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:TableViewCell = tableView!.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TableViewCell
@@ -166,7 +146,6 @@ UITableViewController {
         var comment = self.captionsArray[indexPath.row] as String
         var timeStamp = self.timeData[indexPath.row] as NSDate
         var singleImageObject = self.imgObjects[indexPath.row] as PFObject
-//        var like = self.likes[indexPath.row] as Int
         cell.likeObject = singleImageObject
         
         var dataFormatter:NSDateFormatter = NSDateFormatter()
@@ -183,7 +162,7 @@ UITableViewController {
         
         var findOwner:PFQuery = PFUser.query()!
         findOwner.whereKey("objectId", equalTo: singleImageObject["owner"]!.objectId!!)
-        //is this line right?? TWO exclamation marks??
+
         
         findOwner.findObjectsInBackgroundWithBlock {
             (objects:[AnyObject]?, error:NSError?) -> Void in
